@@ -1,0 +1,11 @@
+.THIS .layout{
+    display: flex;
+}
+.THIS .sub-layout{
+    margin: auto;
+    padding: auto;
+}
+.THIS #box1{
+    margin: 1rem 2rem;
+    min-width: 40%;
+}

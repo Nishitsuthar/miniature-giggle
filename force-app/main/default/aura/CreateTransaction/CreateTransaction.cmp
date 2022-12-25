@@ -1,0 +1,20 @@
+<aura:component access="GLOBAL" controller="InventoryManagementController">
+
+    <aura:attribute name="batch" type="String" default="" access="global" description="description"/>
+    <aura:attribute name="product" type="String" access="global"  default=""/>
+    <aura:attribute name="material" type="String" access="global"  default=""/>
+
+    <lightning:card iconName="custom:custom87" title="Add a Contact">
+    <div class="slds-form-element__control slds-p-around_medium">
+        <lightning:layout>
+            <lightning:layoutItem size="12" padding="around-small">
+                <lightning:input aura:id="batch" label="Batch" type="text" value="{!v.batch}"/>
+                <lightning:input aura:id="product" label="Product" type="text" value="{!v.product}"/>
+                <lightning:input aura:id="material" label="Material" type="text" value="{!v.material}"/>
+                <lightning:button label="Create Transaction" onclick="{!c.handleCreateTransaction}" variant="brand" class="slds-m-top_medium"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    </lightning:card>
+
+</aura:component>
