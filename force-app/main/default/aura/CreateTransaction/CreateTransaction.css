@@ -1,11 +1,4 @@
-.THIS .layout{
-    display: flex;
-}
-.THIS .sub-layout{
-    margin: auto;
-    padding: auto;
-}
-.THIS #box1{
-    margin: 1rem 2rem;
-    min-width: 40%;
+.THIS.slds-card{
+    max-width: 70% !important;
+    margin: auto !important;
 }
