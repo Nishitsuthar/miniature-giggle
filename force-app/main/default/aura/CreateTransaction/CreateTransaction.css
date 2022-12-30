@@ -1,4 +1,18 @@
-.THIS.slds-card{
-    max-width: 70% !important;
-    margin: auto !important;
+.THIS .container{
+    display: flex;
+    width: 100%;
+    background-color: aliceblue;
+}
+.THIS .inner-container{
+    margin: 0 0 1rem 0;
+    padding: auto;
+    width: 100%;
+}
+.THIS .fields{
+    margin: 0 1rem;
+    width: 16%;
+}
+.THIS .table{
+    margin: 0 1rem;
+    width: 40%;
 }

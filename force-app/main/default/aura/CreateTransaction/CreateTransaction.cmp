@@ -1,52 +1,58 @@
 <aura:component implements="force:appHostable" access="GLOBAL" controller="InventoryManagementController">
 
-    <aura:attribute name="batch" type="String" default="" access="global" description="description" />
-    <aura:attribute name="product" type="String" access="global" default="" />
-    <aura:attribute name="material" type="String" access="global" default="" />
-    <aura:attribute name="consignment" type="String" access="global" default="" />
+<!-- attributes -->
+<aura:attribute name="data" type="Object"/>
+<aura:attribute name="columns" type="List"/>
+<aura:attribute name="errors" type="Object" default="[]"/>
+<aura:attribute name="draftValues" type="Object" default="[]"/>
+<aura:attribute name="Products" type="Product__c[]" />
+<aura:attribute name="Batch" type="Batch__c[]" />
 
-    <lightning:card iconName="custom:custom87" title="Add Transaction">
-        <div class="slds-form-element__control slds-p-around_medium">
-            <div>
-                <lightning:layout>
-                    <lightning:layoutItem size="2" padding="around-small">
-                    </lightning:layoutItem>
-                    
-                    <lightning:layoutItem size="4" padding="around-small">
-                        <lightning:input aura:id="batch" label="Batch" type="search" value="{!v.batch}" />
-                    </lightning:layoutItem>
-                    
-                    <lightning:layoutItem size="4" padding="around-small">
-                        <lightning:input aura:id="product" label="Product" type="search" value="{!v.product}" />
-                    </lightning:layoutItem>
-                    
-                    <lightning:layoutItem size="2" padding="around-small">
-                    </lightning:layoutItem>
-                </lightning:layout>
-                
-                <lightning:layout>
-                    <lightning:layoutItem size="2" padding="around-small">
-                    </lightning:layoutItem>
+ <!-- handlers-->
+ <aura:handler name="init" value="{! this }" action="{! c.init }"/>
 
-                    <lightning:layoutItem size="4" padding="around-small">
-                        <lightning:input aura:id="material" label="Material" type="search" value="{!v.material}" />
-                    </lightning:layoutItem>
-                    
-                    <lightning:layoutItem size="4" padding="around-small">
-                        <lightning:input aura:id="consignment" label="Consignment" type="search"
-                            value="{!v.consignment}" />
-                    </lightning:layoutItem>
-
-                    <lightning:layoutItem size="2" padding="around-small">
-                    </lightning:layoutItem>
-                </lightning:layout>
+<div class="container">
+    <div class="inner-container">
+        <lightning:card iconName="action:flow" title="Input Form">
+            
+        </lightning:card>
+    </div>
+    <div class="inner-container">
+        <lightning:card>
+            <div class="form-group fields">
+                <lightning:select aura:id="industryPicklist" name="productPicklist" label="Product" onchange="{!c.getMaterialData}">
+                    <option value="">--None--</option>
+                    <aura:iteration items="{!v.Products}" var="product" indexVar="key">
+                        <option text="{!product.Name}" value="{!product.Id}" />
+                    </aura:iteration>
+                </lightning:select>
             </div>
-            <div class="slds-align_absolute-center">
-                <lightning:button label="Save" onclick="{!c.handleCreateTransaction}" variant="brand"
-                    class="slds-m-top_medium" />
-                <lightning:button label="Cancel" onclick="{}" variant="neutral" class="slds-m-top_medium" />
+            <div class="form-group fields">
+                <lightning:select aura:id="batchPicklist" name="batchPicklist" label="Batch" required="true">
+                    <option value="">--None--</option>
+                    <aura:iteration items="{!v.Batch}" var="b" indexVar="key1">
+                        <option text="{!b.Name}" value="{!b.Id}" />
+                    </aura:iteration>
+                </lightning:select>
             </div>
-        </div>
-    </lightning:card>
+        </lightning:card>
+    </div>
+
+    <div class="inner-container">
+        <lightning:card>
+            <div class="form-group table" style="height: 300px">
+                <lightning:datatable
+                    columns="{! v.columns }"
+                    data="{! v.data }"
+                    keyField="id"
+                    errors="{! v.errors }"
+                    hideCheckboxColumn="true"
+                    draftValues="{! v.draftValues }"
+                    onsave="{! c.handleSaveEdition }"
+                />
+            </div>  
+        </lightning:card>
+    </div>
+</div>
 
 </aura:component>
