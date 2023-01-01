@@ -7,6 +7,7 @@
 <aura:attribute name="draftValues" type="Object" default="[]"/>
 <aura:attribute name="Products" type="Product__c[]" />
 <aura:attribute name="Batch" type="Batch__c[]" />
+<c:Spinner/>
 
  <!-- handlers-->
  <aura:handler name="init" value="{! this }" action="{! c.init }"/>
@@ -20,7 +21,7 @@
     <div class="inner-container">
         <lightning:card>
             <div class="form-group fields">
-                <lightning:select aura:id="industryPicklist" name="productPicklist" label="Product" onchange="{!c.getMaterialData}">
+                <lightning:select aura:id="productPicklist" name="productPicklist" label="Product" onchange="{!c.getMaterialData}">
                     <option value="">--None--</option>
                     <aura:iteration items="{!v.Products}" var="product" indexVar="key">
                         <option text="{!product.Name}" value="{!product.Id}" />
@@ -42,6 +43,7 @@
         <lightning:card>
             <div class="form-group table" style="height: 300px">
                 <lightning:datatable
+                    aura:id="dtTable" 
                     columns="{! v.columns }"
                     data="{! v.data }"
                     keyField="id"
